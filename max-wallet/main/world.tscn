@@ -1,0 +1,106 @@
+[gd_scene load_steps=5 format=3 uid="uid://0ywgowkm2mur"]
+
+[ext_resource type="Script" path="res://scripts/Main.cs" id="1_sytif"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ev106"]
+font_size = 36
+
+[sub_resource type="LabelSettings" id="LabelSettings_1rgmo"]
+font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_c1ouh"]
+font_size = 13
+
+[node name="World" type="Node2D" node_paths=PackedStringArray("UserInput", "ActionButton", "WarningLabel")]
+script = ExtResource("1_sytif")
+UserInput = NodePath("CanvasLayer/Control/LineEdit")
+ActionButton = NodePath("CanvasLayer/Control/ActionButton")
+WarningLabel = NodePath("CanvasLayer/Control/warningLabel")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.377539, 0, 0.0165678, 1)
+
+[node name="title" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -102.5
+offset_top = 52.0
+offset_right = 102.5
+offset_bottom = 102.0
+grow_horizontal = 2
+text = "Max Wallet
+"
+label_settings = SubResource("LabelSettings_ev106")
+
+[node name="message" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -145.5
+offset_top = -51.0
+offset_right = 145.5
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Create Your password
+"
+label_settings = SubResource("LabelSettings_1rgmo")
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = 3.0
+offset_right = 86.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ActionButton" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 593.0
+offset_top = 427.0
+offset_right = 683.0
+offset_bottom = 459.0
+
+[node name="warningLabel" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 36.5
+offset_right = 20.0
+offset_bottom = 59.5
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_c1ouh")
+
+[connection signal="pressed" from="CanvasLayer/Control/ActionButton" to="." method="_on_action_button_pressed"]
