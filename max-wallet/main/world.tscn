@@ -11,9 +11,10 @@ font_size = 28
 [sub_resource type="LabelSettings" id="LabelSettings_c1ouh"]
 font_size = 13
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("UserInput", "ActionButton", "WarningLabel")]
+[node name="World" type="Node2D" node_paths=PackedStringArray("UserInput", "Message", "ActionButton", "WarningLabel")]
 script = ExtResource("1_sytif")
 UserInput = NodePath("CanvasLayer/Control/LineEdit")
+Message = NodePath("CanvasLayer/Control/message")
 ActionButton = NodePath("CanvasLayer/Control/ActionButton")
 WarningLabel = NodePath("CanvasLayer/Control/warningLabel")
 
@@ -63,8 +64,6 @@ offset_right = 145.5
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Create Your password
-"
 label_settings = SubResource("LabelSettings_1rgmo")
 
 [node name="LineEdit" type="LineEdit" parent="CanvasLayer/Control"]
@@ -80,6 +79,7 @@ offset_right = 86.0
 offset_bottom = 34.0
 grow_horizontal = 2
 grow_vertical = 2
+secret = true
 
 [node name="ActionButton" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
