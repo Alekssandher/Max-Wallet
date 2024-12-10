@@ -1,8 +1,4 @@
 using Godot;
-using System;
-using NBitcoin;
-using System.Security.Cryptography.X509Certificates;
-using BCrypt.Net;
 using System.IO;
 using Newtonsoft.Json;
 
@@ -10,7 +6,7 @@ public partial class Main : Node
 {	
 	private Button _createWalletButton;
 	public string inputPassword;
-	public string savePath = "saves/passInfo.json";
+	string savePath = Path.Combine(OS.GetUserDataDir(), "security", "passInfo.json");
 	public int cost = 16;
 
 	[Export]
@@ -25,6 +21,12 @@ public partial class Main : Node
 
 	public override void _Ready()
 	{	
+		string directory = Path.GetDirectoryName(savePath);
+		
+		if (!Directory.Exists(directory)) {
+			Directory.CreateDirectory(directory);
+		}
+
 		WarningLabel.Visible = false;
 
 		if (File.Exists(savePath)) {
@@ -62,7 +64,7 @@ public partial class Main : Node
 
 	}
 	
-	public object Encript(string inputPassword) {
+	public PasswordInfo Encript(string inputPassword) {
 
 		var sw = System.Diagnostics.Stopwatch.StartNew();
 
@@ -73,17 +75,19 @@ public partial class Main : Node
 
 		GD.Print("Levou " + sw.ElapsedMilliseconds + "ms");
 
-		var passInfo = new PasswordInfo {Salt = salt, PasswordHash = passwordHash};
+		return new PasswordInfo {Salt = salt, PasswordHash = passwordHash};
 
-		return passInfo;
 	}
 	public void Cadastro() {
 
-		if(UserInput.Text == ""){ Aviso("Your password can't be empty", "bd0a33"); }
+		if(string.IsNullOrWhiteSpace(UserInput.Text)){ 
+			Aviso("Your password can't be empty", "bd0a33"); 
+			return;	
+		}
 		
 		inputPassword = UserInput.Text;
 
-		object passInfo = Encript(inputPassword);
+		PasswordInfo passInfo = Encript(inputPassword);
 
 		string json = JsonConvert.SerializeObject(passInfo);
 

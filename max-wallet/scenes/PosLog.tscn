@@ -1,15 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://5j7nvjgic6as"]
+[gd_scene load_steps=3 format=3 uid="uid://5j7nvjgic6as"]
+
+[ext_resource type="Script" path="res://scripts/PosLog/PosLog.cs" id="1_ohq6x"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ev106"]
 font_size = 36
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" node_paths=PackedStringArray("CreateWalletButton", "UseWalletButton", "ImportWalletButton", "DeleteWalletButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ohq6x")
+CreateWalletButton = NodePath("VBoxContainer/createWallet")
+UseWalletButton = NodePath("VBoxContainer/useWallet")
+ImportWalletButton = NodePath("VBoxContainer/importWallet")
+DeleteWalletButton = NodePath("VBoxContainer/deleteWallet")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -34,28 +41,40 @@ text = "Max Wallet
 "
 label_settings = SubResource("LabelSettings_ev106")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -103.5
-offset_top = -15.5
-offset_right = 103.5
-offset_bottom = 15.5
+offset_left = -140.0
+offset_top = -52.0
+offset_right = 140.0
+offset_bottom = 109.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 10
 
-[node name="createWallet" type="Button" parent="HBoxContainer"]
+[node name="createWallet" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Create Wallet"
 
-[node name="useWallet" type="Button" parent="HBoxContainer"]
+[node name="useWallet" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Use Wallet"
+
+[node name="importWallet" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Import Wallet"
+
+[node name="deleteWallet" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Delete Wallet"
+
+[connection signal="pressed" from="VBoxContainer/createWallet" to="." method="_on_create_wallet_pressed"]
