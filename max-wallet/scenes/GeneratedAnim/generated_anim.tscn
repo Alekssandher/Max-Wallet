@@ -1,0 +1,159 @@
+[gd_scene load_steps=7 format=3 uid="uid://cw62ay6lpteve"]
+
+[ext_resource type="Script" path="res://scripts/GeneratedAnim/Container.cs" id="1_fxgvj"]
+
+[sub_resource type="Animation" id="Animation_grbxi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GeneratedAnim/container:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(640, 560)]
+}
+
+[sub_resource type="Animation" id="Animation_fv4ce"]
+resource_name = "WalletCreated"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GeneratedAnim/container:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GeneratedAnim/container:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(640, 560), Vector2(640, 360)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k2ih4"]
+_data = {
+"RESET": SubResource("Animation_grbxi"),
+"WalletCreated": SubResource("Animation_fv4ce")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ghko"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ijifb"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="GeneratedAnim" type="AnimationPlayer"]
+libraries = {
+"": SubResource("AnimationLibrary_k2ih4")
+}
+
+[node name="container" type="Panel" parent="." node_paths=PackedStringArray("GoToDashboard", "TitleLabel", "WarningLabel", "SeedLabel")]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fxgvj")
+GoToDashboard = NodePath("GoToDashboard")
+TitleLabel = NodePath("ColorRect/Title")
+WarningLabel = NodePath("ColorRect/Warning")
+SeedLabel = NodePath("Seed")
+
+[node name="ColorRect" type="ColorRect" parent="container"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.0
+offset_top = -213.0
+offset_right = 147.0
+offset_bottom = 165.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.823529)
+
+[node name="Title" type="Label" parent="container/ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -115.5
+offset_top = 15.0
+offset_right = 115.5
+offset_bottom = 38.0
+grow_horizontal = 2
+label_settings = SubResource("LabelSettings_7ghko")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Warning" type="Label" parent="container/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = -129.0
+offset_right = 115.0
+offset_bottom = -89.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_7ghko")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Seed" type="Label" parent="container"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.0
+offset_top = -55.0
+offset_right = 123.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_ijifb")
+autowrap_mode = 3
+
+[node name="GoToDashboard" type="Button" parent="container"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.5
+offset_top = 116.5
+offset_right = 75.5
+offset_bottom = 147.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Go to dashboard"
+
+[connection signal="pressed" from="container/GoToDashboard" to="container" method="_on_go_to_dashboard_pressed"]

@@ -1,15 +1,23 @@
-using Godot;
+
 using NBitcoin;
 
 namespace MaxWallet.scripts.PosLog
-{
+{   
+
+    public class Wallet {
+        public BitcoinAddress Address { get; set; }
+        public BitcoinSecret PrivateKey { get; set; }
+        public string Name { get; set; }
+    }
+    
+    
     public class CreateWallet
     {
-        public string Generate() {
+        public Wallet Generate(string name, out string mnemonicPhrase) {
 
             Network network = Network.Main;
             Mnemonic mnemonic = new Mnemonic(Wordlist.English, WordCount.TwentyOne);
-            string mnemonicPhrase = mnemonic.ToString();
+            mnemonicPhrase = mnemonic.ToString();
 
             ExtKey masterKey = mnemonic.DeriveExtKey();
 
@@ -17,11 +25,13 @@ namespace MaxWallet.scripts.PosLog
             PubKey publicKey = masterKey.PrivateKey.PubKey;
             BitcoinAddress address = publicKey.GetAddress(ScriptPubKeyType.Segwit, network);
 
-            GD.Print("Address: " + address);
-            GD.Print("Private key: " + privateKey);
-            GD.Print("Seed: ", mnemonicPhrase);
+            Wallet wallet = new Wallet{
+                Address = address,
+                PrivateKey = privateKey,
+                Name = name
+            };
 
-            return "";
+            return wallet;
         }
     }
 }
