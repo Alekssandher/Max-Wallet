@@ -62,7 +62,7 @@ libraries = {
 "": SubResource("AnimationLibrary_k2ih4")
 }
 
-[node name="container" type="Panel" parent="." node_paths=PackedStringArray("GoToDashboard", "TitleLabel", "WarningLabel", "SeedLabel")]
+[node name="container" type="Panel" parent="." node_paths=PackedStringArray("TitleLabel", "WarningLabel", "SeedLabel")]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -74,7 +74,6 @@ offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fxgvj")
-GoToDashboard = NodePath("GoToDashboard")
 TitleLabel = NodePath("ColorRect/Title")
 WarningLabel = NodePath("ColorRect/Warning")
 SeedLabel = NodePath("Seed")

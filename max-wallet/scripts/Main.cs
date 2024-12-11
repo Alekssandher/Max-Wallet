@@ -46,6 +46,7 @@ public partial class Main : Node
 		public string Salt { get; set; }
 		public string PasswordHash { get; set; }
 	}
+	
 	private void _on_action_button_pressed() {
 
 		if (File.Exists(savePath)) {
@@ -66,14 +67,11 @@ public partial class Main : Node
 	
 	public PasswordInfo Encript(string inputPassword) {
 
-		var sw = System.Diagnostics.Stopwatch.StartNew();
 
 		string salt = BCrypt.Net.BCrypt.GenerateSalt(16);		
 		
 		string passwordHash =  BCrypt.Net.BCrypt.HashPassword(inputPassword + salt, workFactor: cost);
-		sw.Stop();
-
-		GD.Print("Levou " + sw.ElapsedMilliseconds + "ms");
+		
 
 		return new PasswordInfo {Salt = salt, PasswordHash = passwordHash};
 
@@ -93,6 +91,9 @@ public partial class Main : Node
 
 		File.WriteAllText(savePath, json);
 		
+		FileInfo fileInfo = new FileInfo(savePath);
+		fileInfo.Attributes |= FileAttributes.Hidden | FileAttributes.ReadOnly;
+
 		Aviso("Password successfuly registred", "5db900");
 
 		UserInput.Text = "";

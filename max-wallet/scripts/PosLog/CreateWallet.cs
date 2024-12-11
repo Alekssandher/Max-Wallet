@@ -8,6 +8,11 @@ namespace MaxWallet.scripts.PosLog
         public BitcoinAddress Address { get; set; }
         public BitcoinSecret PrivateKey { get; set; }
         public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return $"Wallet Name: {Name}, Address: {Address}, Private Key: {PrivateKey}";
+        }
     }
     
     

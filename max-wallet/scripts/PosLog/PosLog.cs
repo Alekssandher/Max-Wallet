@@ -1,5 +1,9 @@
+using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
+using System.Text;
 using Godot;
 using MaxWallet.scripts.PosLog;
+using MaxWallet.scripts.utils;
 
 public partial class PosLog : Control
 {
@@ -19,6 +23,8 @@ public partial class PosLog : Control
 	[Export]
 	LineEdit LineEdit;
 	[Export]
+	LineEdit WalletPassword;
+	[Export]
 	AnimationPlayer Animation;
 	
 	CreateWallet createWalletInstance = new CreateWallet();
@@ -27,6 +33,7 @@ public partial class PosLog : Control
 	{
 		LineEdit.Visible = false;
 		GenerateWalletButton.Visible = false;
+		WalletPassword.Visible = false;
 	
 	}
 	
@@ -46,6 +53,7 @@ public partial class PosLog : Control
 		GenerateWalletButton.Text = "Create";
 		GenerateWalletButton.Visible = true;
 		LineEdit.Visible = true;
+		WalletPassword.Visible = true;
 		LineEdit.PlaceholderText = "Your wallet name";
 	}
 
@@ -57,16 +65,32 @@ public partial class PosLog : Control
 			return;
 		}
 
-		
+		string walletPath = "../wallets/" + LineEdit.Text + ".txt";
+
 		string mnemonicPhrase;
 
 		Wallet wallet = createWalletInstance.Generate(LineEdit.Text, out mnemonicPhrase);
 		
+		string walletData = wallet.ToString();
+
+		byte[] data = Encrypt.EncryptData(walletData, WalletPassword.Text);
+
+		string directoryPath = Path.GetDirectoryName(walletPath);
+
+        if (!Directory.Exists(directoryPath)) {
+            Directory.CreateDirectory(directoryPath);
+        }
+
+		File.WriteAllBytes(walletPath, data);
+
 		Container container = GetNode<Container>("GeneratedAnim/container");
 
 		container.FillItens("Wallet Generated", "Here's your seed, you'll not see it again, so keep it in a safe place like your  mind.", mnemonicPhrase);
 		Animation.Play("WalletCreated");
 		
 
+		byte[] fileData = File.ReadAllBytes(walletPath); 
+		string decryptedData = Decrypt.DecryptWalletData(fileData, WalletPassword.Text); 
+		GD.Print(decryptedData); 
 	}
 }

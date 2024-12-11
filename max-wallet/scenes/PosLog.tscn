@@ -9,7 +9,7 @@ font_size = 36
 [sub_resource type="LabelSettings" id="LabelSettings_6qidy"]
 font_size = 13
 
-[node name="Control" type="Control" node_paths=PackedStringArray("WarningLabel", "CreateWalletButton", "GenerateWalletButton", "UseWalletButton", "ImportWalletButton", "DeleteWalletButton", "LineEdit", "Animation")]
+[node name="Control" type="Control" node_paths=PackedStringArray("WarningLabel", "CreateWalletButton", "GenerateWalletButton", "UseWalletButton", "ImportWalletButton", "DeleteWalletButton", "LineEdit", "WalletPassword", "Animation")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,6 +24,7 @@ UseWalletButton = NodePath("VBoxContainer/useWallet")
 ImportWalletButton = NodePath("VBoxContainer/importWallet")
 DeleteWalletButton = NodePath("VBoxContainer/deleteWallet")
 LineEdit = NodePath("VBoxContainer/LineEdit")
+WalletPassword = NodePath("VBoxContainer/WalletPassword")
 Animation = NodePath("GeneratedAnim")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -71,6 +72,10 @@ label_settings = SubResource("LabelSettings_6qidy")
 
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
+
+[node name="WalletPassword" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+secret = true
 
 [node name="createWallet" type="Button" parent="VBoxContainer"]
 layout_mode = 2
