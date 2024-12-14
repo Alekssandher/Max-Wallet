@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cukmb8vmfbulk"]
+[gd_scene load_steps=5 format=3 uid="uid://cukmb8vmfbulk"]
 
 [ext_resource type="Script" path="res://scripts/GenerateWallet/GenerateWallet.cs" id="1_dbbcx"]
+[ext_resource type="PackedScene" uid="uid://doqpacirltslx" path="res://scenes/utils/go_back.tscn" id="2_gdbxe"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0n3ip"]
 font_size = 36
@@ -81,5 +82,7 @@ placeholder_text = "Wallet Password"
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Generate Wallet"
+
+[node name="GoBack" parent="CanvasLayer" instance=ExtResource("2_gdbxe")]
 
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/GenerateWalletButton" to="." method="_on_generate_wallet_button_pressed"]

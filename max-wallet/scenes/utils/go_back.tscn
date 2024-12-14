@@ -1,9 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://doqpacirltslx"]
 
-[ext_resource type="Script" path="res://scripts/goBack/GoBackButton.cs" id="1_c7ngr"]
+[ext_resource type="Script" path="res://scripts/goBack/GoBack.cs" id="1_eiskv"]
 
-[node name="GoBack" type="Node2D"]
-script = ExtResource("1_c7ngr")
+[node name="GoBack" type="Node2D" node_paths=PackedStringArray("GoBackButton")]
+script = ExtResource("1_eiskv")
+GoBackButton = NodePath("Button")
 
 [node name="Button" type="Button" parent="."]
 offset_left = 80.0

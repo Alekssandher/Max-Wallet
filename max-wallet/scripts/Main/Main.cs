@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class PosLog : Control
+public partial class Main : Control
 {
 	[Export]
 	Label WarningLabel;
@@ -14,13 +14,7 @@ public partial class PosLog : Control
 	[Export]
 	Button DeleteWalletButton;
 	
-	
-	public override void _Ready()
-	{
-	
-	}
-	
-	public void Aviso(string message, string color) {
+	private void Aviso(string message, string color) {
 		WarningLabel.LabelSettings.FontColor = new Color(color);
 		WarningLabel.Text = message;
 		WarningLabel.Visible = true;

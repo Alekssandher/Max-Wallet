@@ -15,15 +15,11 @@ public partial class GenerateWallet : Node
 	Label WarningLabel;
 	[Export]
 	CanvasLayer Canvas;
+
 	CreateWallet createWalletInstance = new CreateWallet();
 	PackedScene AnimationScene = GD.Load<PackedScene>("res://scenes/GeneratedAnim/generated_anim.tscn");
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		
-	}
 
-	public void Aviso(string message, string color) {
+	private void Aviso(string message, string color) {
 		WarningLabel.LabelSettings.FontColor = new Color(color);
 		WarningLabel.Text = message;
 		WarningLabel.Visible = true;
@@ -44,7 +40,13 @@ public partial class GenerateWallet : Node
 			return;
 		}
 
-		string walletPath = "../wallets/" + WalletName.Text + ".txt";
+		string walletDirectory = Path.Combine(OS.GetUserDataDir(), "wallets");
+        string walletPath = Path.Combine(walletDirectory, WalletName.Text + ".txt");
+
+		if (File.Exists(walletPath)) {
+			Aviso("A wallet with this name already exists. Please choose a different name.", "bd0a33");
+			return;
+    	}
 
 		string mnemonicPhrase;
 
@@ -60,10 +62,6 @@ public partial class GenerateWallet : Node
 			Directory.CreateDirectory(directoryPath);
 		}
 
-		if (File.Exists(walletPath)) {
-        Aviso("A wallet with this name already exists. Please choose a different name.", "bd0a33");
-        return;
-    	}
 
 		File.WriteAllBytes(walletPath, data);
 
@@ -73,14 +71,14 @@ public partial class GenerateWallet : Node
 		var container = Animation.GetNode<Container>("container");
 		
 		container.FillItens("Wallet Generated", "Here's your seed, you'll not see it again, so keep it in a safe place like your  mind.", mnemonicPhrase);
+		
+		
+
+		GlobalVars.Instance.fileData = wallet;
+
 		Animation.Play("WalletCreated");
-		
-
-		byte[] fileData = File.ReadAllBytes(walletPath); 
-		string decryptedData = Decrypt.DecryptWalletData(fileData, WalletPassword.Text); 
-		GD.Print(decryptedData); 
-
-		
 
 	}
+
+	
 }

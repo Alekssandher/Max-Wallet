@@ -20,7 +20,7 @@ public partial class Container : Panel
 	public void _on_go_to_dashboard_pressed() {
 
 		PackedScene dashboard = ResourceLoader.Load<PackedScene>("res://scenes/Dashboard.tscn");
-
+		
 		GetTree().ChangeSceneToPacked(dashboard);
 	}
 }

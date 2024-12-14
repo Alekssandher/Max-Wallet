@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://5j7nvjgic6as"]
+[gd_scene load_steps=4 format=3 uid="uid://bj2nods6nithn"]
 
-[ext_resource type="Script" path="res://scripts/PosLog/PosLog.cs" id="1_ohq6x"]
+[ext_resource type="Script" path="res://scripts/Main/Main.cs" id="1_6jol2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ev106"]
 font_size = 36
@@ -15,7 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ohq6x")
+script = ExtResource("1_6jol2")
 WarningLabel = NodePath("VBoxContainer/warningLabel")
 CreateWalletButton = NodePath("VBoxContainer/createWallet")
 UseWalletButton = NodePath("VBoxContainer/useWallet")

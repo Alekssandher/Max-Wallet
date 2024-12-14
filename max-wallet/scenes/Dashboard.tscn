@@ -1,3 +1,82 @@
-[gd_scene format=3 uid="uid://duk4mbsx5mqgd"]
+[gd_scene load_steps=4 format=3 uid="uid://duk4mbsx5mqgd"]
 
-[node name="Dashboard" type="Node2D"]
+[ext_resource type="Script" path="res://scripts/dashboard/DashboardManager.cs" id="1_ibbm3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gehl5"]
+font_size = 36
+
+[sub_resource type="LabelSettings" id="LabelSettings_7k8x7"]
+
+[node name="Dashboard" type="Node"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.377539, 0, 0.0165678, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -102.5
+offset_top = 32.0
+offset_right = 102.5
+offset_bottom = 82.0
+grow_horizontal = 2
+text = "Max Wallet
+"
+label_settings = SubResource("LabelSettings_gehl5")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 992.0
+offset_top = 153.0
+offset_right = 1032.0
+offset_bottom = 193.0
+
+[node name="Warning" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_7k8x7")
+
+[node name="Balance" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+text = "Balance"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="BTC" type="Label" parent="CanvasLayer/Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SATS" type="Label" parent="CanvasLayer/Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="USD" type="Label" parent="CanvasLayer/Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Reload" type="Button" parent="CanvasLayer/Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Reload"
+
+[node name="DashboardManager" type="Node" parent="CanvasLayer" node_paths=PackedStringArray("WarningLabel", "BtcBalance", "UsdBalance", "SatsBalance")]
+script = ExtResource("1_ibbm3")
+WarningLabel = NodePath("../Control/VBoxContainer/Warning")
+BtcBalance = NodePath("../Control/VBoxContainer/VBoxContainer/BTC")
+UsdBalance = NodePath("../Control/VBoxContainer/VBoxContainer/USD")
+SatsBalance = NodePath("../Control/VBoxContainer/VBoxContainer/SATS")
+
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/VBoxContainer/Reload" to="CanvasLayer/DashboardManager" method="_on_reload_pressed"]

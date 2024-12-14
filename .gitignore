@@ -16,3 +16,6 @@ mono_crash.*.json
 
 # To ignore the wallets created for tests
 wallets/*
+
+#To igonere the passwordFile
+passInfo.json

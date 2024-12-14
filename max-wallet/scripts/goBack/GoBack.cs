@@ -8,7 +8,7 @@ public partial class GoBack : Node2D
 
 	private void _on_button_pressed () {
 
-		PackedScene posLog = ResourceLoader.Load<PackedScene>("res://scenes/PosLog.tscn");
+		PackedScene posLog = ResourceLoader.Load<PackedScene>("res://scenes/World.tscn");
 
 		GetTree().ChangeSceneToPacked(posLog);
 	}
